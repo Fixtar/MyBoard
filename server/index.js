@@ -17,6 +17,12 @@ app.use(cors());
 app.use(express.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
+app.get("/api/get", (req, res) => {
+    const sqlQuery = "SELECT * FROM simpleboard;";
+    db.query(sqlQuery, (err, result) => {
+        res.send(result);
+    })
+})
 
 app.post("/api/insert", (req, res) => {
     const title = req.body.title;

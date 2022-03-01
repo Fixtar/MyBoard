@@ -1,15 +1,20 @@
 import './App.css';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import Editor from './Editor';
 import ContentBoard from './ContentBoard';
+import Axios from 'axios';
 
 function App() {
 
   const [onBoardContents, setonBoardContents] = useState([]);
 
-  function Update(state) {
-    setonBoardContents(onBoardContents.concat(state));
-  }
+  useEffect(() => {
+    Axios.get('http://localhost:8000/api/get').then((response) => {
+      setonBoardContents(response.data);
+    })
+  }, [onBoardContents])
+
+
 
   return (
     <div className="App">
@@ -24,7 +29,7 @@ function App() {
       </div>
 
       <div className='formWrapper'>
-        <Editor Update={Update} />
+        <Editor />
       </div>
 
     </div>
