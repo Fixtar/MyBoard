@@ -1,6 +1,7 @@
 import { CKEditor } from '@ckeditor/ckeditor5-react';
 import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
 import { useState } from 'react';
+import Axios from 'axios';
 
 
 function Editor(props) {
@@ -9,9 +10,15 @@ function Editor(props) {
         content: ''
     });
 
-    const onclick = () => {
-        props.Update(boardContent);
-    }
+    const submitReview = () => {
+        Axios.post('http://localhost:8000/api/insert', {
+            title: boardContent.title,
+            content: boardContent.content
+        }).then(() => {
+            alert('등록 완료!');
+        })
+    };
+
 
     const getboardSubmit = (e) => {
         const { name, value } = e.target;
@@ -52,7 +59,7 @@ function Editor(props) {
                 }}
             />
             <button className='submitButton'
-                onClick={onclick}
+                onClick={submitReview}
             >등록</button>
         </div>
     );
