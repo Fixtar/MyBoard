@@ -4,12 +4,13 @@ import ActionButton from './ActionButton';
 
 
 function ContentBoard(props) {
-    const element = props.element;
+    const { article, onDelete } = props;
+
     return (
-        <div key={element.title} style={{ border: '1px solid #333' }}>
-            <h2>{element.title}</h2>
-            <div>{ReactHtmlParser(element.content)}</div>
-            <ActionButton />
+        <div key={article.title} style={{ border: '1px solid #333' }}>
+            <h2>{article.title}</h2>
+            <div>{ReactHtmlParser(article.content)}</div>
+            <ActionButton idx={article.idx} onDelete={onDelete} />
         </div>
     );
 

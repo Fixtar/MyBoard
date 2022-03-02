@@ -1,22 +1,18 @@
 import { CKEditor } from '@ckeditor/ckeditor5-react';
 import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
 import { useState } from 'react';
-import Axios from 'axios';
 
 
 function Editor(props) {
+    const onSubmit = props.onSubmit;
+
     const [boardContent, setboardContent] = useState({
         title: '',
         content: ''
     });
 
     const submitReview = () => {
-        Axios.post('http://localhost:8000/api/insert', {
-            title: boardContent.title,
-            content: boardContent.content
-        }).then(() => {
-            alert('등록 완료!');
-        })
+        onSubmit(boardContent.title, boardContent.content);
     };
 
 
