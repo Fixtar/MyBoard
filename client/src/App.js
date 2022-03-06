@@ -54,7 +54,9 @@ function App() {
       <div className='contentsContainer'>
         {onBoardContents.map(article => {
           return (
-            <ContentBoard article={article} onDelete={() => handleDelete(article.idx)} />
+            <ContentBoard
+              article={article}
+              onDelete={() => handleDelete(article.idx)} />
           );
         })}
       </div>
